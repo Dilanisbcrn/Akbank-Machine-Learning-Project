@@ -36,6 +36,7 @@ Humidity3pm
 Pressure3pm
 Humidity9am
 WindGustSpeed
+
 Bu analizler, modelin karar verirken hangi verilere daha fazla ağırlık verdiğini gösterdi ve genel doğruluk başarısını daha da anlamlı kıldı.
 
 Bu projede hem veri ön işleme hem de makine öğrenmesi algoritmalarının kıyaslanması üzerine güzel deneyimler kazandım.Kendi başıma veriyi indirip, analiz edip, temizleyip, modelleyip değerlendirmek bana çok şey kattı.
