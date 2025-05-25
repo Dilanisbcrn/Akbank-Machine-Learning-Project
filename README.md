@@ -12,12 +12,16 @@ Veri setini incelediğimde bazı sütunların sayılar yerine metinlerden oluşt
 Tahmin yapabilmek için RainTomorrow dışındaki tüm hava durumu verilerini giriş değişkeni (feature) olarak belirledim. Ardından veriyi eğitim ve test olarak ikiye ayırdım.Eğitim verisi (%80) modeli öğretmek için, test verisi (%20) ise modelin ne kadar doğru çalıştığını ölçmek için kullandım.Bu işlemde train_test_split fonksiyonunu kullandım.
 
 Model karşılaştırma sürecinde projem için üç farklı makine öğrenmesi algoritmasını denedim: Random Forest, Logistic Regression ve Decision Tree Classifier. Amacım, hangi modelin verim açısından en iyi performansı gösterdiğini gözlemleyerek en uygun algoritmayla ilerlemekti.Bu süreci daha güvenilir hale getirmek adına çapraz doğrulama (cross-validation) yöntemini kullandım ve elde ettiğim ortalama doğruluk (accuracy) skorları şu şekildeydi:
+
 Random Forest: 0.843
 Logistic Regression: 0.838
 Decision Tree: 0.774
+
 Bu sonuçlara göre en iyi performansı Random Forest modeli gösterdi. Karmaşık veri yapılarından bile etkili şekilde öğrenebilen bu algoritma, aynı zamanda overfitting problemlerine karşı da oldukça dayanıklı. Özellikle "yağmur yağmayacak" durumları tahmin etmede çok başarılıydı. Örneğin:
+
 Yağmur yok tahminlerinde: Precision = 0.87, Recall = 0.95
 Yağmur var tahminlerinde: Precision = 0.74, Recall = 0.49
+
 Yağmurun yağacağı durumlarda model biraz daha zorlandı. Bu da aslında anlaşılır bir durum çünkü bu tür olaylar genellikle daha az sayıda gerçekleştiği ve öngörülmesi zor olduğu için modelin bu sınıfta zorlanması beklenebilir.
 Logistic Regression modeli ise daha basit ve hızlı çalışan bir algoritma. %83 doğruluk oranıyla oldukça iyi performans gösterdi, ancak özellikle yağmurun yağacağı durumları yakalamada Random Forest kadar başarılı değildi.
 Decision Tree Classifier ise karar verme süreçlerini görselleştirebilmesi açısından anlaşılır bir yapı sunuyordu. Fakat modelin aşırı öğrenmeye (overfitting) yatkın olması, test doğruluğunu olumsuz etkiledi. %77 doğruluk oranıyla diğer modellere kıyasla daha düşük bir performans sergiledi.
