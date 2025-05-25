@@ -22,11 +22,7 @@ Bulut verileri gibi çok sayıda eksik bilgi içeren sütunları veri setinden �
 
 Diğer eksik verileri ise medyan ya da mod gibi istatistiksel yöntemlerle doldurdum.
 
-Kategorik değişkenleri sayısal forma dönüştürdüm:
-
-RainToday ve RainTomorrow gibi ikili kategorik sütunları Label Encoding ile,
-
-Rüzgar yönleri (WindGustDir, WindDir9am, WindDir3pm) gibi çok kategorili sütunları ise One-Hot Encoding yöntemiyle dönüştürdüm.
+Kategorik değişkenleri sayısal forma dönüştürdüm: RainToday ve RainTomorrow gibi ikili kategorik sütunları Label Encoding ile, Rüzgar yönleri (WindGustDir, WindDir9am, WindDir3pm) gibi çok kategorili sütunları ise One-Hot Encoding yöntemiyle dönüştürdüm.
 
 Değişkenler arasındaki ilişkiyi anlamak adına korelasyon matrisi oluşturarak görsel analiz yaptım.
 
