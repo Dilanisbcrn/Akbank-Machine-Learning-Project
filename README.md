@@ -11,19 +11,24 @@ Veri setini incelediğimde bazı sütunların sayılar yerine metinlerden oluşt
 
 Tahmin yapabilmek için RainTomorrow dışındaki tüm hava durumu verilerini giriş değişkeni (feature) olarak belirledim. Ardından veriyi eğitim ve test olarak ikiye ayırdım.Eğitim verisi (%80) modeli öğretmek için, test verisi (%20) ise modelin ne kadar doğru çalıştığını ölçmek için kullandım.Bu işlemde train_test_split fonksiyonunu kullandım.
 
-Modeli eğitirken birkaç farklı algoritmayı denedim, çünkü hangisinin verim açısından en iyisi olduğunu görmek istiyordum. İşte denediklerim ve sonuçları:
-1. Random Forest Classifier
-Bu model en başarılı olanıydı. Karmaşık veri yapılarından bile kolayca öğrenebiliyor ve aşırı uyum (overfitting) problemlerine karşı da dayanıklı. Genel doğruluk oranı %85 civarındaydı ki bence bu oldukça iyi bir sonuç. Yağmur yağmayacak durumları tahmin etmede gerçekten başarılıydı yani “Yağmur yok” dediğinde çoğunlukla haklıydı (Precision 0.87, Recall 0.95). Ancak yağmurun yağacağı durumlarda biraz daha zorlandı, tahminler tam tutmadı (Precision 0.74, Recall 0.49). Bu da doğal, çünkü yağmurun geleceğini kesin bilmek her zaman mümkün değil.
+Model karşılaştırma sürecinde projem için üç farklı makine öğrenmesi algoritmasını denedim: Random Forest, Logistic Regression ve Decision Tree Classifier. Amacım, hangi modelin verim açısından en iyi performansı gösterdiğini gözlemleyerek en uygun algoritmayla ilerlemekti.Bu süreci daha güvenilir hale getirmek adına çapraz doğrulama (cross-validation) yöntemini kullandım ve elde ettiğim ortalama doğruluk (accuracy) skorları şu şekildeydi:
+Random Forest: 0.843
+Logistic Regression: 0.838
+Decision Tree: 0.774
+Bu sonuçlara göre en iyi performansı Random Forest modeli gösterdi. Karmaşık veri yapılarından bile etkili şekilde öğrenebilen bu algoritma, aynı zamanda overfitting problemlerine karşı da oldukça dayanıklı. Özellikle "yağmur yağmayacak" durumları tahmin etmede çok başarılıydı. Örneğin:
+Yağmur yok tahminlerinde: Precision = 0.87, Recall = 0.95
+Yağmur var tahminlerinde: Precision = 0.74, Recall = 0.49
+Yağmurun yağacağı durumlarda model biraz daha zorlandı. Bu da aslında anlaşılır bir durum çünkü bu tür olaylar genellikle daha az sayıda gerçekleştiği ve öngörülmesi zor olduğu için modelin bu sınıfta zorlanması beklenebilir.
+Logistic Regression modeli ise daha basit ve hızlı çalışan bir algoritma. %83 doğruluk oranıyla oldukça iyi performans gösterdi, ancak özellikle yağmurun yağacağı durumları yakalamada Random Forest kadar başarılı değildi.
+Decision Tree Classifier ise karar verme süreçlerini görselleştirebilmesi açısından anlaşılır bir yapı sunuyordu. Fakat modelin aşırı öğrenmeye (overfitting) yatkın olması, test doğruluğunu olumsuz etkiledi. %77 doğruluk oranıyla diğer modellere kıyasla daha düşük bir performans sergiledi.
 
-2. Lojistik Regresyon
-Bu model basit ama işe yarar bir yöntem. Doğruluk oranı %83 seviyesindeydi. Ama yağmur yağma durumlarını yakalamada Random Forest kadar başarılı değildi. Yine de hafif ve hızlı çalışması nedeniyle denemeye değerdi.
-
-3. Decision Tree Classifier
-Bu model biraz daha “anlaşılır” ve karar verme süreçlerini gösterebilir olması açısından güzeldi. Ama aşırı uyum problemi nedeniyle test sonuçları pek parlak olmadı, doğruluk %77 civarındaydı. Yani diğer modellere kıyasla biraz daha düşük performans verdi.
-
-Sonuç olarak Random Forest benim için en iyi seçenek oldu. Hem genel doğruluğu yüksek, hem de yağmur yağmayacak durumları oldukça güvenilir tahmin edebiliyor. Bu yüzden projede bu modeli tercih ettim.
-
-Modelin başarısını değerlendirmek için Confusion Matrix kullandım. Böylece hangi sınıfın ne kadar doğru tahmin edildiğini görselleştirdim.Feature Importance (Özellik Önemi) grafiği ile hangi değişkenlerin model için daha önemli olduğunu analiz ettim. Buna göre en etkili özellikler:Humidity3pm,Pressure3pm,Humidity9am,WindGustSpeed oldu.
+Tüm bu değerlendirmeler sonucunda, projemin kalan adımlarında Random Forest ile ilerlemeye karar verdim. Çünkü bu model, hem genel doğruluk açısından yüksek başarı sağladı hem de yağmur yağmayacak durumları güvenilir şekilde tahmin edebildi.
+Ayrıca modelin başarısını daha detaylı analiz etmek için Confusion Matrix (Karmaşıklık Matrisi) kullandım. Bu sayede her bir sınıfın ne kadar doğru tahmin edildiğini görselleştirdim. Ek olarak, Feature Importance (Özellik Önemi) analizini gerçekleştirdim ve model üzerinde en etkili değişkenlerin şunlar olduğunu gözlemledim:
+Humidity3pm
+Pressure3pm
+Humidity9am
+WindGustSpeed
+Bu analizler, modelin karar verirken hangi verilere daha fazla ağırlık verdiğini gösterdi ve genel doğruluk başarısını daha da anlamlı kıldı.
 
 Bu projede hem veri ön işleme hem de makine öğrenmesi algoritmalarının kıyaslanması üzerine güzel deneyimler kazandım.Kendi başıma veriyi indirip, analiz edip, temizleyip, modelleyip değerlendirmek bana çok şey kattı.
 
