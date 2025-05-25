@@ -63,7 +63,7 @@ WindGustSpeed
 
 Bu analizler modelin hangi verileri ön planda tuttuğunu anlamamı sağladı ve genel doğruluk başarısının sebeplerini daha iyi açıklamamı sağladı.
 
-Sonuç olarak, bu projede veri ön işleme, model eğitimi, algoritma kıyaslamaları ve model performans analizi gibi önemli süreçleri uygulayarak kapsamlı bir makine öğrenmesi deneyimi yaşadım. Veriyi indirip, analiz edip, temizleyip, modelleyip değerlendirme süreci bana çok fazla şey öğretti.
+Bu proje sayesinde gerçek dünya verileriyle çalışma pratiği kazandım. Özellikle eksik verilerin temizlenmesi, kategorik verilerin dönüştürülmesi ve veri setinin analiz edilmesi gibi veri ön işleme adımlarını etkin bir şekilde uyguladım. Farklı makine öğrenmesi algoritmalarını deneyimleyerek hangisinin daha uygun olduğuna karar verebilme becerimi geliştirdim.Ayrıca, model değerlendirme metriklerini (accuracy, precision, recall) kullanarak modellerin güçlü ve zayıf yönlerini yorumlamayı öğrendim. Uygulamalı olarak gerçekleştirdiğim bu süreçler, teorik bilgilerimi pekiştirmemi sağladı. Genel olarak, baştan sona bir makine öğrenmesi projesini bağımsız şekilde yürütmek, hem teknik yetkinliğimi hem de problem çözme becerilerimi önemli ölçüde artırdı.
 
 ## Kaggle Linki
 
