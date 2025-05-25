@@ -30,5 +30,6 @@ Bu projede hem veri ön işleme hem de makine öğrenmesi algoritmalarının kı
 ## Kaggle Linki
 Projeyi buradan detaylı inceleyebilirsiniz:  
 https://www.kaggle.com/code/dilanisb/akbank-machine-learning-project
+
 Projem için kullandıpım veri setim:
 https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package
