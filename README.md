@@ -41,8 +41,11 @@ Decision Tree Classifier
 Model performanslarını yalnızca doğruluk (accuracy) oranıyla değil, aynı zamanda precision, recall gibi sınıflandırma metrikleriyle de değerlendirdim. Sonuçların güvenilirliğini artırmak adına cross-validation yöntemini de kullandım.
 
 Model	Doğruluk Oranı
+
 Random Forest	0.843
+
 Logistic Regression	0.838
+
 Decision Tree	0.774
 
 Bu sonuçlara göre en iyi performansı Random Forest modeli gösterdi. Özellikle karmaşık verileri anlamada ve genelleştirme kapasitesinde güçlü bir model olduğunu gözlemledim.
