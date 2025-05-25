@@ -1,73 +1,57 @@
 # Akbank Makine Öğrenmesi Projesi – Yağmur Tahmini
 
-Bu proje, Akbank ve Global AI Hub iş birliğiyle düzenlenen "Makine Öğrenmesine Giriş Bootcamp" kapsamında geliştirdiğim bir sınıflandırma problemine odaklanan çalışmadır. Temel hedefim, geçmiş hava durumu verilerine dayanarak ertesi gün yağmur yağıp yağmayacağını tahmin etmekti. Bu süreçte farklı makine öğrenmesi algoritmalarını karşılaştırarak, sınıflandırma problemlerine yönelik çözüm geliştirme pratiği yapmış oldum.
+Bu proje, Akbank ve Global AI Hub iş birliğiyle düzenlenen Makine Öğrenmesine Giriş Bootcamp için hazırladığım denetimli öğrenme projesidir. Amacım, elimdeki hava durumu verilerini kullanarak ertesi gün yağmur yağacak mı, yağmayacak mı bunu tahmin etmektir. Proje sonucunda yağmurun yağıp yağmayacağını ne kadar doğru tahmin edebildiğimi test etme fırsatı buldum.
 
--Kullanılan Veri Seti
+Kullandığım veri seti, Kaggle’da bulunan "Weather Dataset from Rattle Package" adlı veri setidir. Bu set, Avustralya’ya ait günlük hava durumu verilerini içermektedir. İçerisinde sıcaklık, nem, rüzgar hızı, yağış miktarı gibi 24 farklı değişken bulunmakta ve toplamda yaklaşık 145.000 veri yer almaktadır. Tahmin etmeye çalıştığım hedef değişken ise RainTomorrow (yarın yağmur yağacak mı) olup, bu değişkenin değerleri “Yes” ya da “No” şeklindedir.
 
-Projede kullandığım veri seti, Kaggle platformunda açık kaynak olarak paylaşılan "Weather Dataset from Rattle Package" adlı veri setidir. Bu veri seti, Avustralya'nın çeşitli bölgelerine ait günlük hava durumu ölçümlerini içermektedir.
+İlk olarak veri setini projeme dahil ettim ve head(), info(), describe() gibi fonksiyonlarla veriyi tanıyarak genel bir analiz gerçekleştirdim.
 
-Yaklaşık 145.000 örnek
+Veriyle çalışırken karşılaştığım ilk zorluk eksik değerlerdi. Özellikle bulut verileri gibi bazı sütunlarda çok fazla eksik değer bulunduğundan bu sütunları veri setinden çıkardım. Diğer sütunlardaki eksik değerleri ise medyan gibi uygun istatistiksel yöntemlerle doldurarak veri temizliğini sağladım. Bu adım, model başarımını doğrudan etkileyebileceği için büyük önem taşıyordu.
 
-24 bağımsız değişken
+Ayrıca, bazı sütunlar sayısal yerine metinsel ifadeler içeriyordu. Örneğin Yes/No yanıtları veya rüzgar yönleri gibi kategorik veriler. Makine öğrenmesi algoritmaları sayısal verilerle çalıştığı için bu kategorik verileri sayısal forma dönüştürdüm. Bu dönüşümler için:
 
-Hedef değişken: RainTomorrow (Yarın yağmur yağacak mı? "Yes" / "No")
+Label Encoding yöntemini RainToday ve RainTomorrow gibi sütunlarda uyguladım.
 
-Veri setinde sıcaklık, nem, rüzgar yönü, yağış miktarı gibi birçok meteorolojik parametre yer almaktadır.
+One-Hot Encoding yöntemini ise WindGustDir, WindDir9am ve WindDir3pm gibi rüzgar yönlerini dönüştürmek için kullandım.
 
--Veri Ön İşleme Süreci
+Modelin değişkenler arasındaki ilişkileri daha iyi öğrenebilmesi adına korelasyon matrisi oluşturdum.
 
-Veri setini projeye dahil ettikten sonra ilk olarak temel bir analiz gerçekleştirdim. head(), info(), describe() gibi temel fonksiyonlarla verinin yapısını inceledim. Eksik veri oranlarını analiz ettikten sonra şu adımları izledim:
+Tahmin işlemleri için RainTomorrow dışındaki tüm değişkenleri giriş (feature) olarak kullandım. Veriyi %80 eğitim – %20 test olarak ayırdım. Bu işlemde train_test_split fonksiyonunu kullandım.
 
-Bulut verileri gibi çok sayıda eksik bilgi içeren sütunları veri setinden çıkardım.
+Model karşılaştırması için üç farklı makine öğrenmesi algoritmasını denedim:
 
-Diğer eksik verileri ise medyan ya da mod gibi istatistiksel yöntemlerle doldurdum.
-
-Kategorik değişkenleri sayısal forma dönüştürdüm: RainToday ve RainTomorrow gibi ikili kategorik sütunları Label Encoding ile, Rüzgar yönleri (WindGustDir, WindDir9am, WindDir3pm) gibi çok kategorili sütunları ise One-Hot Encoding yöntemiyle dönüştürdüm.
-
-Değişkenler arasındaki ilişkiyi anlamak adına korelasyon matrisi oluşturarak görsel analiz yaptım.
-
-Bu adımlar sonucunda veri, modelleme süreci için daha uygun ve temiz bir hale geldi.
-
--Modelleme ve Kullanılan Algoritmalar
-
-Veri setini %80 eğitim ve %20 test olmak üzere ikiye ayırdıktan sonra üç farklı sınıflandırma algoritması uyguladım:
-
-Random Forest Classifier
+Random Forest
 
 Logistic Regression
 
 Decision Tree Classifier
 
-Model performanslarını yalnızca doğruluk (accuracy) oranıyla değil, aynı zamanda precision, recall gibi sınıflandırma metrikleriyle de değerlendirdim. Sonuçların güvenilirliğini artırmak adına cross-validation yöntemini de kullandım.
+Bu süreçte daha güvenilir sonuçlar elde etmek adına çapraz doğrulama (cross-validation) yöntemini uyguladım. Elde ettiğim ortalama doğruluk (accuracy) skorları şu şekildedir:
 
-Model	Doğruluk Oranı
+Random Forest: 0.843
 
-Random Forest	0.843
+Logistic Regression: 0.838
 
-Logistic Regression	0.838
+Decision Tree: 0.774
 
-Decision Tree	0.774
+Bu sonuçlara göre, en iyi performansı Random Forest modeli gösterdi. Özellikle karmaşık veri yapılarından etkili biçimde öğrenebilmesi ve overfitting'e karşı dayanıklı olması sayesinde modelin güvenilirliğini artırdı.
 
-Bu sonuçlara göre en iyi performansı Random Forest modeli gösterdi. Özellikle karmaşık verileri anlamada ve genelleştirme kapasitesinde güçlü bir model olduğunu gözlemledim.
+Özellikle:
 
-Precision / Recall Değerleri (Random Forest)
-Yağmur yağmayacak (No):
+Yağmur yok tahminlerinde: Precision = 0.87, Recall = 0.95
 
-Precision: 0.87
+Yağmur var tahminlerinde: Precision = 0.74, Recall = 0.49
 
-Recall: 0.95
+Model, yağmurun yağacağı durumları tahmin etmede biraz daha zorlandı. Bu durum anlaşılır bir sonuçtur çünkü bu olaylar genelde daha az sıklıkta gerçekleşir ve öngörülmesi daha zordur.
 
-Yağmur yağacak (Yes):
+Logistic Regression modeli daha basit ve hızlı çalışsa da özellikle yağmur yağacağı durumları tahmin etmede Random Forest kadar başarılı değildi.
+Decision Tree Classifier ise modelin karar yapısını anlamak için faydalıydı fakat overfitting eğilimi nedeniyle daha düşük doğruluk sağladı.
 
-Precision: 0.74
+Tüm bu değerlendirmelerin ardından projemin sonraki adımlarında Random Forest modeliyle ilerlemeye karar verdim. Bu modeli değerlendirirken:
 
-Recall: 0.49
+Confusion Matrix (Karmaşıklık Matrisi) yardımıyla sınıflandırma performansını daha iyi gözlemledim.
 
-Model, özellikle yağmurun yağmayacağı durumları oldukça başarılı şekilde tahmin ederken, yağmur yağacak sınıfında daha düşük başarı gösterdi. Bunun temel nedeni, bu sınıfa ait örneklerin veri setinde daha az yer alması ve verinin dengesiz yapısıydı.
-
--Ek Analizler
-
-Model seçimi sonrasında, Confusion Matrix (Karmaşıklık Matrisi) yardımıyla modelin hangi sınıflarda ne kadar başarılı olduğunu görselleştirdim. Ayrıca, özellik önem düzeyi (feature importance) analizini gerçekleştirerek modelin karar sürecinde en çok hangi değişkenlere dayandığını belirledim. En önemli değişkenler şunlardı:
+Feature Importance (Özellik Önemi) analizini yaparak modelin karar sürecinde en etkili olan değişkenleri belirledim:
 
 Humidity3pm
 
@@ -77,26 +61,15 @@ Humidity9am
 
 WindGustSpeed
 
-Bu analiz, modelin mantığını daha iyi anlamamı sağladı.
+Bu analizler modelin hangi verileri ön planda tuttuğunu anlamamı sağladı ve genel doğruluk başarısının sebeplerini daha iyi açıklamamı sağladı.
 
--Projeden Kazandıklarım
-
-Bu projeyle birlikte;
-
-Gerçek bir veri seti üzerinde veri temizleme ve ön işleme pratiği yaptım.
-
-Farklı makine öğrenmesi algoritmalarını uygulayıp karşılaştırarak model seçimi konusunda tecrübe kazandım.
-
-Sıfırdan bir projeyi tasarlayıp uygulayarak, süreci baştan sona bağımsız şekilde yönetme becerisi edindim.
-
-Accuracy, precision, recall gibi değerlendirme metriklerini uygulamalı olarak kullanma fırsatı buldum.
-
-Teorik bilgileri pratiğe dökerek kendimi geliştirdim.
+Sonuç olarak, bu projede veri ön işleme, model eğitimi, algoritma kıyaslamaları ve model performans analizi gibi önemli süreçleri uygulayarak kapsamlı bir makine öğrenmesi deneyimi yaşadım. Veriyi indirip, analiz edip, temizleyip, modelleyip değerlendirme süreci bana çok fazla şey öğretti.
 
 ## Kaggle Linki
-Proje not defteri (Kaggle):
+
+Projeyi buradan detaylı inceleyebilirsiniz:
 https://www.kaggle.com/code/dilanisb/akbank-machine-learning-project
 
-Kullanılan veri seti:
+Projede kullandığım veri seti:
 https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package
 
