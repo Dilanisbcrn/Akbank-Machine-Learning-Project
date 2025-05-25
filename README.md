@@ -3,6 +3,7 @@
 Bu proje, Akbank ve Global AI Hub iş birliğiyle düzenlenen "Makine Öğrenmesine Giriş Bootcamp" kapsamında geliştirdiğim bir sınıflandırma problemine odaklanan çalışmadır. Temel hedefim, geçmiş hava durumu verilerine dayanarak ertesi gün yağmur yağıp yağmayacağını tahmin etmekti. Bu süreçte farklı makine öğrenmesi algoritmalarını karşılaştırarak, sınıflandırma problemlerine yönelik çözüm geliştirme pratiği yapmış oldum.
 
 -Kullanılan Veri Seti
+
 Projede kullandığım veri seti, Kaggle platformunda açık kaynak olarak paylaşılan "Weather Dataset from Rattle Package" adlı veri setidir. Bu veri seti, Avustralya'nın çeşitli bölgelerine ait günlük hava durumu ölçümlerini içermektedir.
 
 Yaklaşık 145.000 örnek
@@ -14,6 +15,7 @@ Hedef değişken: RainTomorrow (Yarın yağmur yağacak mı? "Yes" / "No")
 Veri setinde sıcaklık, nem, rüzgar yönü, yağış miktarı gibi birçok meteorolojik parametre yer almaktadır.
 
 -Veri Ön İşleme Süreci
+
 Veri setini projeye dahil ettikten sonra ilk olarak temel bir analiz gerçekleştirdim. head(), info(), describe() gibi temel fonksiyonlarla verinin yapısını inceledim. Eksik veri oranlarını analiz ettikten sonra şu adımları izledim:
 
 Bulut verileri gibi çok sayıda eksik bilgi içeren sütunları veri setinden çıkardım.
@@ -31,6 +33,7 @@ Değişkenler arasındaki ilişkiyi anlamak adına korelasyon matrisi oluşturar
 Bu adımlar sonucunda veri, modelleme süreci için daha uygun ve temiz bir hale geldi.
 
 -Modelleme ve Kullanılan Algoritmalar
+
 Veri setini %80 eğitim ve %20 test olmak üzere ikiye ayırdıktan sonra üç farklı sınıflandırma algoritması uyguladım:
 
 Random Forest Classifier
@@ -64,6 +67,7 @@ Recall: 0.49
 Model, özellikle yağmurun yağmayacağı durumları oldukça başarılı şekilde tahmin ederken, yağmur yağacak sınıfında daha düşük başarı gösterdi. Bunun temel nedeni, bu sınıfa ait örneklerin veri setinde daha az yer alması ve verinin dengesiz yapısıydı.
 
 -Ek Analizler
+
 Model seçimi sonrasında, Confusion Matrix (Karmaşıklık Matrisi) yardımıyla modelin hangi sınıflarda ne kadar başarılı olduğunu görselleştirdim. Ayrıca, özellik önem düzeyi (feature importance) analizini gerçekleştirerek modelin karar sürecinde en çok hangi değişkenlere dayandığını belirledim. En önemli değişkenler şunlardı:
 
 Humidity3pm
@@ -77,6 +81,7 @@ WindGustSpeed
 Bu analiz, modelin mantığını daha iyi anlamamı sağladı.
 
 -Projeden Kazandıklarım
+
 Bu projeyle birlikte;
 
 Gerçek bir veri seti üzerinde veri temizleme ve ön işleme pratiği yaptım.
