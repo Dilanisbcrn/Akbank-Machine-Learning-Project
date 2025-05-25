@@ -28,8 +28,7 @@ Modelin başarısını değerlendirmek için Confusion Matrix kullandım. Böyle
 Bu projede hem veri ön işleme hem de makine öğrenmesi algoritmalarının kıyaslanması üzerine güzel deneyimler kazandım.Kendi başıma veriyi indirip, analiz edip, temizleyip, modelleyip değerlendirmek bana çok şey kattı.
 
 ## Kaggle Linki
-Projeyi buradan detaylı inceleyebilirsiniz:  
-https://www.kaggle.com/code/dilanisb/akbank-machine-learning-project
+Projeyi buradan detaylı inceleyebilirsiniz:  https://www.kaggle.com/code/dilanisb/akbank-machine-learning-project
 
 Projem için kullandıpım veri setim:
 https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package
